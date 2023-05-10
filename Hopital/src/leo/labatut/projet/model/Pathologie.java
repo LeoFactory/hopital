@@ -1,32 +1,35 @@
 package leo.labatut.projet.model;
 
 public class Pathologie {
-    private static int nbPathologies=0;
-    private int idPathologie;
+ 
+    private int id;
     private String nom;
 
-    public Pathologie(String nom) {
-        this.idPathologie=nbPathologies;
-        nbPathologies++;
+    public Pathologie(int id, String nom) {
+    	
+        this.id=id;
         this.nom=nom;
     }
 
+    
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+    	this.id=id;
+    }
     public String getNom() {
         return nom;
     }
-
-    public int getIdPathologie() {
-        return idPathologie;
-    }
-
-    public static int getNbPathologies() {
-        return nbPathologies;
+    public void setNom(String nom) {
+    	this.nom=nom;
     }
 
     @Override
     public String toString() {
         return "Pathologie{" +
-                "idPathologie=" + idPathologie +
+                "idPathologie=" + id +
                 ", nom='" + nom +
                 '}';
     }

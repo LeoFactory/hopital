@@ -1,26 +1,36 @@
 package leo.labatut.projet.model;
 
 public class Consultation {
-    private static int nbConsultation;
-    private int idConsultation;
+    
+    private int id;
     private Patient patient;
     private Medecin medecin;
-    public Consultation(Patient patient, Medecin medecin) {
-        this.idConsultation=nbConsultation;
-        nbConsultation++;
+    
+    public Consultation(int id, Patient patient, Medecin medecin) {
+        
+        this.id=id;
         this.patient=patient;
         this.medecin=medecin;
 
     }
-
-    public int getIdConsultation() {
-        return idConsultation;
+    public int getId() {
+    	return this.id;
     }
-
-    public int getNbConsultation() {
-        return nbConsultation;
+    public void setId(int id) {
+    	this.id=id;
     }
-
+    public Patient getPatient() {
+    	return this.patient;
+    }
+    public void setPatient(Patient patient) {
+    	this.patient=patient;
+    }
+    public Medecin getMedecin() {
+    	return this.medecin;
+    }
+    public void setMedecin(Medecin medecin) {
+    	this.medecin=medecin;
+    }
     @Override
     public String toString() {
         return "Consultation{" +

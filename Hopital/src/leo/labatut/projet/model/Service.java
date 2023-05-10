@@ -1,20 +1,16 @@
 package leo.labatut.projet.model;
 
 public class Service {
-    private static int nbService=0;
-    private int idService;
+   private int id;
     private String nom;
-    public Service(String nom) {
+    
+    public Service(int id , String nom) {
+    	this.id=id;
         this.nom=nom;
-        this.idService=nbService;
-        nbService++;
+        
     }
-    public int getIdService() {
-        return idService;
-    }
-
-    public static int getNbService() {
-        return nbService;
+    public int getId() {
+        return this.id;
     }
 
     public String getNom() {

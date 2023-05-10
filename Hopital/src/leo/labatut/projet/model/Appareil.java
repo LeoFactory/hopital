@@ -1,22 +1,18 @@
 package leo.labatut.projet.model;
 
 public class Appareil {
-    private static int nbAppareils;
-    private int idAppareil;
+    
+    private int id;
     private String libelle;
-    public Appareil(String libelle) {
-        this.idAppareil=nbAppareils;
-        nbAppareils++;
+    
+    public Appareil(int id, String libelle) {
+        this.id=id;
         this.libelle=libelle;
 
     }
 
-    public int getIdAppareil() {
-        return idAppareil;
-    }
-
-    public int getNbAppareils() {
-        return nbAppareils;
+    public int getId() {
+        return id;
     }
 
     public String getLibelle() {
@@ -30,7 +26,7 @@ public class Appareil {
     @Override
     public String toString() {
         return "Appareil{" +
-                "idAppareil=" + idAppareil +
+                "id =" + id +
                 ", libelle='" + libelle + '\'' +
                 '}';
     }

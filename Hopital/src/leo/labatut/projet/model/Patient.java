@@ -2,18 +2,24 @@ package leo.labatut.projet.model;
 import java.util.*;
 
 public class Patient {
-    private static int nbPatient;
-    private int idPatient;
+ 
+    private int id;
     private String nom;
     private String prenom;
     private Date dateCreation;
-    public Patient(String nom, String prenom, Date date) {
-        this.idPatient=nbPatient;
-        nbPatient++;
+    
+    public Patient(int id, String nom, String prenom, Date date) {
+        this.id=id;
         this.nom=nom;
         this.prenom=prenom;
         this.dateCreation=date;
 
+    }
+    public int getId() {
+    	return this.id;
+    }
+    public void setId(int id) {
+    	this.id=id;
     }
     public String getNom() {
         return nom;
@@ -27,9 +33,6 @@ public class Patient {
         return dateCreation;
     }
 
-    public int getIdPatient() {
-        return idPatient;
-    }
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -43,14 +46,10 @@ public class Patient {
         this.prenom = prenom;
     }
 
-    public static int getNbPatient() {
-        return nbPatient;
-    }
-
     @Override
     public String toString() {
         return "Patient{" +
-                "idPatient=" + idPatient +
+                "id = " + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", dateCreation=" + dateCreation +
