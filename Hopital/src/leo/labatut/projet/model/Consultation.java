@@ -6,6 +6,11 @@ public class Consultation {
     private Patient patient;
     private Medecin medecin;
     
+    public Consultation(Patient patient, Medecin medecin) {
+    	 this.patient=patient;
+         this.medecin=medecin;
+    }
+    
     public Consultation(int id, Patient patient, Medecin medecin) {
         
         this.id=id;
@@ -34,7 +39,7 @@ public class Consultation {
     @Override
     public String toString() {
         return "Consultation{" +
-                "idConsultation=" + idConsultation +
+                "idConsultation=" + id +
                 ", patient=" + patient.toString() +
                 ", medecin=" + medecin.toString() +
                 '}';

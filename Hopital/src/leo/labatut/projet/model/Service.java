@@ -24,7 +24,7 @@ public class Service {
     @Override
     public String toString() {
         return "Service{" +
-                "idService=" + idService +
+                "idService=" + id +
                 ", nom='" + nom + '\'' +
                 '}';
     }
