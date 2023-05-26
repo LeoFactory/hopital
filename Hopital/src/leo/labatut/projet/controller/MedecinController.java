@@ -24,7 +24,8 @@ public class MedecinController {
 		this.dao=dao;
 		this.view=view;
 		this.view.fillTable(this.dao.findAll());
-		this.view.getOkayButton().addActionListener(new AjouterOkayListener());
+		this.view.getOkayButton_ajouter().addActionListener(new AjouterOkayListener());
+		this.view.getOkayButton_supprimer().addActionListener(new SupprimerOkayListener());
 		
 		
 
@@ -39,7 +40,7 @@ public class MedecinController {
 			try {
 				newMedecin= new Medecin(view.getNom().getText(),view.getPrenom().getText(),new SimpleDateFormat("dd/MM/yyyy").parse(view.getDateNaissance().getText()),view.getSexe().getText().charAt(0),service,view.getEmail().getText(),view.getMdp().getText());
 			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 			dao.create(newMedecin);
@@ -58,5 +59,19 @@ public class MedecinController {
 
 			}
 		}
+	class SupprimerOkayListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			
+			//il faut supprimer tous les suivis du médecin avant de faire la suppression du medecin 
+			//sinon erreur SQL lié à la contrainte FOREIGN KEY dans suivi
+			
+			dao.delete(dao.find(Integer.parseInt(view.getId().getText())));
+			view.getId().setText(null);
+			
+			view.getSupprimerDialog().dispose();
+			view.getTableModel().setRowCount(0);
+			view.fillTable(dao.findAll());
+		}
+	}
 			
 }

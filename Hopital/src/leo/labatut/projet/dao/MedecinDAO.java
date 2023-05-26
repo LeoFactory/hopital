@@ -39,7 +39,7 @@ public class MedecinDAO extends DAO<Medecin>{
 		@Override
 		public boolean delete(Medecin obj) {
 			boolean bool = false;
-			String s = "DELETE FROM medecin WHERE id = "+obj.getId();
+			String s = "DELETE FROM medecin WHERE medecin_id = "+obj.getId();
 			
 			Statement stmt=null;
 			
