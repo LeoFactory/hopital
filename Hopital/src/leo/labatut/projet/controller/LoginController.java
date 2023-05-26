@@ -50,11 +50,13 @@ class SubmitListener implements ActionListener{
 	                
 	                
 					if (rs.next()) {
+						
 						MedecinView view = new MedecinView();
 						MedecinDAO dao = new MedecinDAO(cn);
 						MedecinController medecinCtrlr = new MedecinController(dao,view);
 						login.setVisible(false);
 						view.setVisible(true);
+						
 					} else {
 	                    JOptionPane.showMessageDialog(login, "Wrong Username & Password");
 					}
