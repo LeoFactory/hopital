@@ -111,7 +111,8 @@ public class PathologieDAO extends DAO<Pathologie> {
 
 	@Override
 	public ArrayList<Pathologie> findAll() {
-		String sql="SELECT * FROM service;";
+		listDAO.clear();
+		String sql="SELECT * FROM pathologie;";
 		Statement stmt= null;
 		ResultSet rs=null;
 		
@@ -128,7 +129,7 @@ public class PathologieDAO extends DAO<Pathologie> {
 		
 		try {
 			while (rs.next()) {
-				i = rs.getInt("Medecin_id");
+				i = rs.getInt("pathologie_id");
 				s1 = rs.getString("nom");
 				this.listDAO.add( new Pathologie(i,s1)) ;
 			}

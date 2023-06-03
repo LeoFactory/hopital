@@ -1,10 +1,14 @@
 package leo.labatut.projet.model;
 
+import java.util.ArrayList;
+
 public class Ordonnance {
 
     private int idOrdonnance;
     private Patient patient;
     private Medecin medecin;
+    
+    private ArrayList <Medicament>listMedicament;
     public Ordonnance(Patient patient , Medecin medecin) {
         this.patient=patient;
         this.medecin=medecin;

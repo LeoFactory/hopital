@@ -1,21 +1,32 @@
 package leo.labatut.projet.model;
 
+import java.util.Date;
+
 public class Consultation {
     
     private int id;
-    private Patient patient;
-    private Medecin medecin;
+    private Suivi suivi;
+    private Date date;
+    private Ordonnance ordonnance;
     
-    public Consultation(Patient patient, Medecin medecin) {
-    	 this.patient=patient;
-         this.medecin=medecin;
+    public Consultation(Suivi suivi, Date date) {
+    	this.date=date;
+         this.suivi=suivi;
     }
     
-    public Consultation(int id, Patient patient, Medecin medecin) {
+    public Consultation(int id, Suivi suivi,Date date) {
         
         this.id=id;
-        this.patient=patient;
-        this.medecin=medecin;
+        this.date=date;
+        this.suivi=suivi;
+
+    }
+    public Consultation(int id, Suivi suivi, Date date, Ordonnance ordonnance) {
+        
+        this.id=id;
+        this.date=date;
+        this.suivi=suivi;
+        this.ordonnance=ordonnance;
 
     }
     public int getId() {
@@ -24,24 +35,29 @@ public class Consultation {
     public void setId(int id) {
     	this.id=id;
     }
-    public Patient getPatient() {
-    	return this.patient;
+    public Date getDate() {
+    	return this.date;
     }
-    public void setPatient(Patient patient) {
-    	this.patient=patient;
+    public void setDate(Date date) {
+    	this.date=date;
     }
-    public Medecin getMedecin() {
-    	return this.medecin;
+    public Suivi getSuivi() {
+    	return this.suivi;
     }
-    public void setMedecin(Medecin medecin) {
-    	this.medecin=medecin;
+    public void setSuivi(Suivi suivi) {
+    	this.suivi=suivi;
+    }
+    public Ordonnance getOrdonnance() {
+    	return this.ordonnance;
+    }
+    public void setOrdonnance(Ordonnance ordonnance) {
+    	this.ordonnance=ordonnance;
     }
     @Override
     public String toString() {
         return "Consultation{" +
                 "idConsultation=" + id +
-                ", patient=" + patient.toString() +
-                ", medecin=" + medecin.toString() +
+                "Date = "+this.date+
                 '}';
     }
 }

@@ -37,7 +37,7 @@ public class ServiceDAO extends DAO<Service> {
 	@Override
 	public boolean delete(Service obj) {
 		boolean bool = false;
-		String s = "DELETE FROM service WHERE id = "+obj.getId();
+		String s = "DELETE FROM service WHERE service_id = "+obj.getId();
 		
 		Statement stmt=null;
 		

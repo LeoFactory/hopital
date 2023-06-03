@@ -76,7 +76,7 @@ public class PatientDAO extends DAO<Patient>{
 		}
 		@Override
 		public ArrayList<Patient> findAll(){
-			
+			listDAO.clear();
 			String sql="SELECT * FROM patient;";
 			Statement stmt= null;
 			ResultSet rs=null;
@@ -117,7 +117,6 @@ public class PatientDAO extends DAO<Patient>{
 		
 		@Override
 		public Patient find(int id){
-			
 			String sql="SELECT * FROM patient WHERE patient_id = "+id;
 			Statement stmt= null;
 			ResultSet rs=null;
@@ -160,7 +159,7 @@ public class PatientDAO extends DAO<Patient>{
 		}
 		
 		public Patient find(String nom){
-			
+			listDAO.clear();
 			String sql="SELECT * FROM patient WHERE nom = '"+nom+"'";
 			Statement stmt= null;
 			ResultSet rs=null;
