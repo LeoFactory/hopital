@@ -1,0 +1,81 @@
+logins 
+
+le mot de passe est "motdepasse" pour la plupart des utilisateurs je précise tous les mots de passe dans ce fichier.
+
+le nom d'utilisateur est simplement le nom de famille.
+
+Super Admin
+
+"DUPOND" "motdepasse"
+***********************************************************************************************************************
+medecins 
+
+"LEGRAND" "motdepasse"
+
+"RICHARD" "motdepasse2"
+
+"GERARD" "motdepasse"
+
+"PINAUD" "motdepasse"
+
+"CHARLIE" "motdepasse"
+
+"FLETAN" "motdepasse"
+
+"LEBEL" "motdepasse"
+
+"DAGENAIS" "motdepasse"
+
+"JOBIN" "motdepasse"
+
+"BUREAU" "motdepasse"
+***********************************************************************************************************************
+agents d'administration
+
+"GAROU" "1234"
+
+"BELIER" "motdepasse"
+
+"DE LA RONDE" "motdepasse"
+
+"CAOUETTE" "motdepasse"
+
+"DESRUISSEAUX" "motdepasse"
+
+"BERARD" "motdepasse"
+
+"BARRIERE" "motdepasse"
+
+"ROYER" "motdepasse"
+
+"SEVIER" "motdepasse"
+***********************************************************************************************************************
+techniciens
+
+"RENOIR" "motdepasse"
+
+"RENAUD" "motdepasse"
+
+"TURANAU" "motdepasse"
+***********************************************************************************************************************
+Infirmiers
+
+"FERDINAND" "motdepasse"
+
+"CHARRETTE" "motdepasse"
+
+"GAULIN" "motdepasse"
+
+"ETOILE" "motdepasse"
+
+"PARISEAU" "motdepasse"
+
+"CORBIN" "motdepasse"
+
+"RACICOT" "motdepasse"
+
+"LETOURNEAU" "motdepasse"
+
+"FECTAU" "motdepasse"
+
+"LABELLE" "motdepasse"
