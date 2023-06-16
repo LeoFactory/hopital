@@ -59,7 +59,7 @@ public class MedecinDAO extends DAO<Medecin>{
 
 		@Override
 		public boolean update(Medecin obj) {
-			String sql="UPDATE medecin SET nom = '"+obj.getNom()+"', prenom = '"+obj.getPrenom()
+			String sql="UPDATE medecin SET service_id = "+obj.getService().getId()+", email = '"+obj.getEmail()+"', mdp = '"+obj.getMdp()
 					+ "' WHERE medecin_id = "+obj.getId();
 			Statement stmt= null;	
 			

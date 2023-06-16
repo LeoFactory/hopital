@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import leo.labatut.projet.model.Chambre;
+import leo.labatut.projet.model.Pathologie;
 import leo.labatut.projet.model.Patient;
 
 public class PatientDAO extends DAO<Patient>{
@@ -17,7 +19,7 @@ public class PatientDAO extends DAO<Patient>{
 
 		@Override
 		public boolean create(Patient obj) {
-			String sql="INSERT INTO patient(nom, prenom, date_naissance, email, date_creation, sexe) VALUES ('"+obj.getNom()+"','"+obj.getPrenom()+"','"+new java.sql.Date(obj.getDateNaissance().getTime())+"','"+obj.getEmail()+"','"+obj.getDateCreation()+"','"+obj.getSexe()+"')";
+			String sql="INSERT INTO patient(nom, prenom, date_naissance, email, date_creation, sexe) VALUES ('"+obj.getNom()+"','"+obj.getPrenom()+"','"+new java.sql.Date(obj.getDateNaissance().getTime())+"','"+obj.getEmail()+"','"+new java.sql.Date(obj.getDateCreation().getTime())+"','"+obj.getSexe()+"')";
 			Statement stmt= null;	
 			
 			boolean bool =false;
@@ -57,7 +59,8 @@ public class PatientDAO extends DAO<Patient>{
 		@Override
 		public boolean update(Patient obj) {
 			String sql="UPDATE patient SET nom = '"+obj.getNom()+"', prenom = '"+obj.getPrenom()
-					+ "' WHERE patient_id = "+obj.getId();
+					+ "', chambre_id = '"+obj.getChambre().getId()
+					+"' WHERE patient_id = "+obj.getId();
 			Statement stmt= null;	
 			
 			boolean bool =false;
@@ -85,6 +88,8 @@ public class PatientDAO extends DAO<Patient>{
 			String s1,s2,s3;
 			Date dateNaissance,dateCreation;
 			char ch;
+			Chambre chambre = null;
+			ChambreDAO chambreDAO = new ChambreDAO(cn);
 			
 			try {	
 				stmt = cn.createStatement();
@@ -103,8 +108,9 @@ public class PatientDAO extends DAO<Patient>{
 					s3 = rs.getString("email");
 					dateCreation=rs.getDate("date_creation");
 					ch= rs.getString("sexe").charAt(0);
+					chambre = chambreDAO.find(rs.getInt("chambre_id"));
 					
-					this.listDAO.add( new Patient(i,s1,s2,dateNaissance,s3,dateCreation,ch)) ;
+					this.listDAO.add( new Patient(i,s1,s2,dateNaissance,dateCreation,ch,s3,chambre)) ;
 				}
 				
 			} catch (SQLException e) {
@@ -127,6 +133,8 @@ public class PatientDAO extends DAO<Patient>{
 			String s1,s2,s3;
 			Date dateNaissance,dateCreation;
 			char ch;
+			Chambre chambre = null;
+			ChambreDAO chambreDAO = new ChambreDAO(cn);
 			
 			try {	
 				stmt = cn.createStatement();
@@ -145,8 +153,9 @@ public class PatientDAO extends DAO<Patient>{
 					s3 = rs.getString("email");
 					dateCreation=rs.getDate("date_creation");
 					ch= rs.getString("sexe").charAt(0);
+					chambre = chambreDAO.find(rs.getInt("chambre_id"));
 					
-					patient= new Patient(i,s1,s2,dateNaissance,s3,dateCreation,ch) ;
+					patient= new Patient(i,s1,s2,dateNaissance,dateCreation,ch,s3,chambre) ;
 				}
 				
 			} catch (SQLException e) {
@@ -170,6 +179,8 @@ public class PatientDAO extends DAO<Patient>{
 			String s1,s2,s3;
 			Date dateNaissance,dateCreation;
 			char ch;
+			Chambre chambre = null;
+			ChambreDAO chambreDAO = new ChambreDAO(cn);
 			
 			try {	
 				stmt = cn.createStatement();
@@ -188,7 +199,9 @@ public class PatientDAO extends DAO<Patient>{
 					s3 = rs.getString("email");
 					dateCreation=rs.getDate("date_creation");
 					ch= rs.getString("sexe").charAt(0);
-				patient= new Patient(i,s1,s2,dateNaissance,s3,dateCreation,ch) ;
+					chambre = chambreDAO.find(rs.getInt("chambre_id"));
+					
+				patient= new Patient(i,s1,s2,dateNaissance,dateCreation,ch,s3,chambre) ;
 				}
 				
 			} catch (SQLException e) {
@@ -199,5 +212,49 @@ public class PatientDAO extends DAO<Patient>{
 			return patient;
 		
 		}
+		public ArrayList<Patient> findByChambre(Chambre obj){
+			
+			listDAO.clear();
+			String sql="SELECT * FROM patient WHERE chambre_id ="+obj.getId()+";";
+			Statement stmt= null;
+			ResultSet rs=null;
+			
+			int i;
+			String s1,s2,s3;
+			Date dateNaissance,dateCreation;
+			char ch;
+			Chambre chambre = null;
+			ChambreDAO chambreDAO = new ChambreDAO(cn);
+			
+			try {	
+				stmt = cn.createStatement();
+				rs = stmt.executeQuery(sql);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				while (rs.next()) {
+					i = rs.getInt("patient_id");
+					s1 = rs.getString("nom");
+					s2 = rs.getString("prenom");
+					dateNaissance= rs.getDate("date_naissance");
+					s3 = rs.getString("email");
+					dateCreation=rs.getDate("date_creation");
+					ch= rs.getString("sexe").charAt(0);
+					chambre = chambreDAO.find(rs.getInt("chambre_id"));
+					
+					this.listDAO.add( new Patient(i,s1,s2,dateNaissance,dateCreation,ch,s3,chambre)) ;
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			return this.listDAO;
+		}
+		
 }
 

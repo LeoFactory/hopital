@@ -9,6 +9,8 @@ import java.util.Date;
 
 import leo.labatut.projet.model.AgentAdmin;
 import leo.labatut.projet.model.Medecin;
+import leo.labatut.projet.model.Pathologie;
+import leo.labatut.projet.model.Patient;
 import leo.labatut.projet.model.Suivi;
 
 public class SuiviDAO extends DAO<Suivi>{
@@ -39,7 +41,7 @@ public class SuiviDAO extends DAO<Suivi>{
 	@Override
 	public boolean delete(Suivi obj) {
 		boolean bool = false;
-		String s = "DELETE FROM suivi WHERE id = "+obj.getId();
+		String s = "DELETE FROM suivi WHERE suivi_id = "+obj.getId();
 		
 		Statement stmt=null;
 		
@@ -155,6 +157,76 @@ public class SuiviDAO extends DAO<Suivi>{
 	public ArrayList findByMedecin(Medecin medecin) {
 		listDAO.clear();
 		String sql="SELECT * FROM suivi WHERE medecin_id = "+medecin.getId();
+		Statement stmt= null;
+		ResultSet rs=null;
+		
+		int i,j,k,l;
+		PatientDAO patientDAO = new PatientDAO(this.cn);
+		PathologieDAO pathologieDAO = new PathologieDAO(this.cn);
+		MedecinDAO medecinDAO = new MedecinDAO(this.cn);
+		
+		try {	
+			stmt = cn.createStatement();
+			rs = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			while (rs.next()) {
+				i = rs.getInt("suivi_id");
+				j = rs.getInt("patient_id");
+				k = rs.getInt("pathologie_id");
+				l = rs.getInt("medecin_id");
+				this.listDAO.add( new Suivi(i,patientDAO.find(j),pathologieDAO.find(k),medecinDAO.find(l))) ;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return this.listDAO;
+	}
+	public ArrayList findByPathologie(Pathologie pathologie) {
+		listDAO.clear();
+		String sql="SELECT * FROM suivi WHERE pathologie_id = "+pathologie.getId();
+		Statement stmt= null;
+		ResultSet rs=null;
+		
+		int i,j,k,l;
+		PatientDAO patientDAO = new PatientDAO(this.cn);
+		PathologieDAO pathologieDAO = new PathologieDAO(this.cn);
+		MedecinDAO medecinDAO = new MedecinDAO(this.cn);
+		
+		try {	
+			stmt = cn.createStatement();
+			rs = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			while (rs.next()) {
+				i = rs.getInt("suivi_id");
+				j = rs.getInt("patient_id");
+				k = rs.getInt("pathologie_id");
+				l = rs.getInt("medecin_id");
+				this.listDAO.add( new Suivi(i,patientDAO.find(j),pathologieDAO.find(k),medecinDAO.find(l))) ;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return this.listDAO;
+	}
+	public ArrayList findByPatient(Patient patient) {
+		listDAO.clear();
+		String sql="SELECT * FROM suivi WHERE patient_id = "+patient.getId();
 		Statement stmt= null;
 		ResultSet rs=null;
 		

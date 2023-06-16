@@ -11,11 +11,15 @@ public abstract class Personnel {
     private char sexe;
     private String email;
     private String mdp;
-    
+    /**
+     * constructeur
+     */
     public Personnel() {
     	
     }
-    
+    /**
+     * constructeur
+     */
     public Personnel(String nom, String prenom, Date dateNaissance,char sexe,String email) {
     	this.nom=nom;
     	this.prenom=prenom;   	
@@ -23,6 +27,9 @@ public abstract class Personnel {
         this.sexe=sexe;
         this.email=email;
     }
+    /**
+     * constructeur
+     */
     public Personnel(String nom, String prenom, Date dateNaissance,char sexe,String email, String mdp) {
     	this.nom=nom;
     	this.prenom=prenom;   	
@@ -31,7 +38,9 @@ public abstract class Personnel {
         this.email=email;
         this.mdp=mdp;
     }
-    
+    /**
+     * constructeur
+     */
     public Personnel(int id, String nom, String prenom, Date dateNaissance,char sexe,String email) {
     	this.id=id;
         this.nom=nom;
@@ -41,6 +50,8 @@ public abstract class Personnel {
         this.email=email;
         
     }
+    
+   //getters /setters
     public int getId() {
     	return this.id;
     }
@@ -83,14 +94,15 @@ public abstract class Personnel {
     public void setMdp(String mdp) {
     	this.mdp=mdp;
     }
-
+    //toString
     @Override
     public String toString() {
         return
-                "Id = "+id+ " nom = '" + nom + '\'' +
-                ", prenom = '" + prenom + '\''+
-                ", date de naissance = '"+dateNaissance+'\''+
-                ", genre = '"+sexe+'\''
+                "Id = "+id+ " \nnom = '" + nom + '\'' +
+                ", \nprenom = '" + prenom + '\''+
+                ", \ndate de naissance = '"+dateNaissance+'\''+
+                ", \ngenre = '"+sexe+'\''+
+                ", \nE-mail = '"+email+'\''
                 ;
     }
 }

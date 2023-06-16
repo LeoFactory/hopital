@@ -10,8 +10,17 @@ public class Patient {
     private Date dateCreation;
     private String email;
     private char sexe;
-   
-    public Patient( String nom, String prenom, Date dateNaissance,String email, Date dateCreation,char sexe) {        
+    private Chambre chambre; 
+   /**
+    * Constructeur
+    * @param nom
+    * @param prenom
+    * @param dateNaissance
+    * @param dateCreation
+    * @param sexe
+    * @param email
+    */
+    public Patient( String nom, String prenom, Date dateNaissance, Date dateCreation,char sexe,String email) {        
         this.nom=nom;
         this.prenom=prenom;     
         this.dateNaissance=dateNaissance;
@@ -20,8 +29,17 @@ public class Patient {
         this.sexe=sexe;
         
     }
-    
-    public Patient(int id, String nom, String prenom, Date dateNaissance,String email, Date dateCreation,char sexe) {
+    /**
+     * constructeur 2
+     * @param id
+     * @param nom
+     * @param prenom
+     * @param dateNaissance
+     * @param dateCreation
+     * @param sexe
+     * @param email
+     */
+    public Patient(int id, String nom, String prenom, Date dateNaissance, Date dateCreation,char sexe,String email) {
         this.id=id;        
         this.nom=nom;
         this.prenom=prenom;  
@@ -33,6 +51,32 @@ public class Patient {
         
 
     }
+    /**
+     * constructeur 3
+     * @param id
+     * @param nom
+     * @param prenom
+     * @param dateNaissance
+     * @param dateCreation
+     * @param sexe
+     * @param email
+     * @param chambre
+     */
+    public Patient(int id, String nom, String prenom, Date dateNaissance, Date dateCreation,char sexe,String email,Chambre chambre) {
+        this.id=id;        
+        this.nom=nom;
+        this.prenom=prenom;  
+        this.dateNaissance=dateNaissance;
+        this.email=email;
+        this.dateCreation=dateCreation;
+        this.sexe=sexe;
+        this.chambre=chambre;
+        
+
+    }
+    /*
+     * getters/setters
+     */
     public int getId() {
     	return this.id;
     }
@@ -82,15 +126,24 @@ public class Patient {
     public void setSexe(char sexe) {
     	this.sexe=sexe;
     }
-
+    
+    public Chambre getChambre() {
+    	return this.chambre;
+    }
+    public void setChambre(Chambre chambre) {
+    	this.chambre=chambre;
+    }
 
     @Override
     public String toString() {
         return "Patient{" +
-                "id = " + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", dateCreation=" + dateCreation +
+        		", \ndateCreation=" + dateCreation +
+                ", \nid = " + id +
+                ", \nnom='" + nom + '\'' +
+                ", \nprenom='" + prenom + '\'' +
+                ", \nDate de naissance='" + dateNaissance + '\'' +
+                ", \nChambre ='" + chambre + '\'' +
+                ", \nE-mail='" + email + '\'' +              
                 '}';
     }
 }

@@ -56,7 +56,7 @@ public class AgentAdminDAO extends DAO<AgentAdmin>{
 
 		@Override
 		public boolean update(AgentAdmin obj) {
-			String sql="UPDATE agent_admin SET nom = '"+obj.getNom()+"', prenom = '"+obj.getPrenom()
+			String sql="UPDATE agent_admin SET email = '"+obj.getEmail()+"', mdp = '"+obj.getMdp()
 					+ "' WHERE agent_admin_id = "+obj.getId();
 			Statement stmt= null;	
 			
@@ -76,7 +76,7 @@ public class AgentAdminDAO extends DAO<AgentAdmin>{
 		}
 		@Override
 		public ArrayList<AgentAdmin> findAll(){
-			
+			this.listDAO.clear();
 			String sql="SELECT * FROM agent_admin;";
 			Statement stmt= null;
 			ResultSet rs=null;

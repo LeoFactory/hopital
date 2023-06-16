@@ -11,25 +11,19 @@ class AppareilTest {
 
     @Test
     void getLibelle() {
-        Appareil app = new Appareil("Sonotone");
+        Appareil app = new Appareil(1,"Sonotone");
         assertEquals("Sonotone",app.getLibelle());
     }
 
     @Test
     void setLibelle() {
-        Appareil app = new Appareil("Sonotone");
+        Appareil app = new Appareil(1,"Sonotone");
         app.setLibelle("Béquille");
         assertEquals("Béquille",app.getLibelle());
     }
     @Test
     void getIdAppareil() {
-        Appareil app = new Appareil("Sonotone");
-        assertEquals(app.getIdAppareil(),0);
-    }
-
-    @Test
-    void getNbAppareils() {
-        Appareil app = new Appareil("Sonotone");
-        assertEquals(app.getNbAppareils(),1);
+        Appareil app = new Appareil(1,"Sonotone");
+        assertEquals(1,app.getId());
     }
 }

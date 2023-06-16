@@ -97,7 +97,7 @@ public class AppareilDAO extends DAO<Appareil> {
 		try {
 			while (rs.next()) {
 				i = rs.getInt("appareil_id");
-				s1 = rs.getString("nom");
+				s1 = rs.getString("libelle");
 				appareil= new Appareil(i,s1) ;
 			}
 			
@@ -111,7 +111,8 @@ public class AppareilDAO extends DAO<Appareil> {
 
 	@Override
 	public ArrayList<Appareil> findAll() {
-		String sql="SELECT * FROM service;";
+		this.listDAO.clear();
+		String sql="SELECT * FROM appareil;";
 		Statement stmt= null;
 		ResultSet rs=null;
 		
@@ -128,8 +129,8 @@ public class AppareilDAO extends DAO<Appareil> {
 		
 		try {
 			while (rs.next()) {
-				i = rs.getInt("Medecin_id");
-				s1 = rs.getString("nom");
+				i = rs.getInt("appareil_id");
+				s1 = rs.getString("libelle");
 				this.listDAO.add( new Appareil(i,s1)) ;
 			}
 			

@@ -4,13 +4,17 @@ public class Appareil {
     
     private int id;
     private String libelle;
-    
+    /**
+     * constructeur
+     * @param id
+     * @param libelle
+     */
     public Appareil(int id, String libelle) {
         this.id=id;
         this.libelle=libelle;
 
     }
-
+    //getter/setters
     public int getId() {
         return id;
     }

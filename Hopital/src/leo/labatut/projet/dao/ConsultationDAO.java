@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import leo.labatut.projet.model.Appareil;
 import leo.labatut.projet.model.Consultation;
 import leo.labatut.projet.model.Medecin;
 import leo.labatut.projet.model.Service;
@@ -17,7 +18,6 @@ public class ConsultationDAO extends DAO<Consultation>{
 
 	public ConsultationDAO(Connection connection) {
 		super(connection);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -32,7 +32,6 @@ public class ConsultationDAO extends DAO<Consultation>{
 			int res = stmt.executeUpdate(sql);
 			bool=true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -61,7 +60,25 @@ public class ConsultationDAO extends DAO<Consultation>{
 
 	@Override
 	public boolean update(Consultation obj) {
-		String sql="UPDATE consultation SET suivi_id = '"+obj.getSuivi().getId()+ "' WHERE consultation_id= "+obj.getId();
+		String sql="UPDATE consultation SET suivi_id = "+obj.getSuivi().getId()+", ordonnance = '"+obj.getOrdonnance()+"', soin = '"+obj.getSoin()+ "' WHERE consultation_id= "+obj.getId();
+		Statement stmt= null;	
+
+		boolean bool =false;
+
+
+		try {	
+			stmt = cn.createStatement();
+			int res = stmt.executeUpdate(sql);
+			bool=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return bool;
+	}
+	public boolean updateAppareil(Consultation obj) {
+		String sql="UPDATE consultation SET suivi_id = "+obj.getSuivi().getId()+", appareil_id = "+obj.getAppareil().getId()+", statut_appareil = '"+obj.getStatutAppareil()+"', ordonnance = '"+obj.getOrdonnance()+"', soin = '"+obj.getSoin()+ "' WHERE consultation_id= "+obj.getId();
 		Statement stmt= null;	
 
 		boolean bool =false;
@@ -79,6 +96,7 @@ public class ConsultationDAO extends DAO<Consultation>{
 		return bool;
 	}
 
+
 	@Override
 	public Consultation find(int id) {
 		String sql="SELECT * FROM consultation WHERE consultation_id = "+id+";";
@@ -88,7 +106,9 @@ public class ConsultationDAO extends DAO<Consultation>{
 		Consultation consultation = null;
 		Suivi suivi=null;
 		SuiviDAO suiviDAO = new SuiviDAO(cn);
-		
+		Appareil appareil = null;
+		AppareilDAO appareilDAO = new AppareilDAO(cn);
+		String statut;
 		int i;
 		Date date;
 	
@@ -106,7 +126,9 @@ public class ConsultationDAO extends DAO<Consultation>{
 				i = rs.getInt("consultation_id");
 				date = rs.getDate("date_consultation");
 				suivi= suiviDAO.find(rs.getInt("suivi_id"));
-				consultation=new Consultation (i,suivi,date);
+				appareil= appareilDAO.find(rs.getInt("appareil_id"));
+				statut=rs.getString("statut_appareil");
+				consultation=new Consultation (i,suivi,date,appareil,statut);
 			}
 			
 		} catch (SQLException e) {
@@ -209,6 +231,45 @@ public class ConsultationDAO extends DAO<Consultation>{
 				date = rs.getDate("date_consultation");
 				suivi= suiviDAO.find(rs.getInt("suivi_id"));
 				listDAO.add(new Consultation (i,suivi,date));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return this.listDAO;
+	}
+	public ArrayList<Consultation> findByAppareilStatut() {
+		listDAO.clear();
+		String sql= "SELECT * FROM consultation WHERE appareil_id IS NOT NULL;";
+		Statement stmt= null;
+		ResultSet rs=null;
+		
+		int i;
+		Date date;
+		Suivi suivi=null;
+		Appareil appareil= null;
+		String statut;
+		SuiviDAO suiviDAO = new SuiviDAO(cn);
+		AppareilDAO appareilDAO = new AppareilDAO(cn);
+		
+		try {	
+			stmt = cn.createStatement();
+			rs = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			while (rs.next()) {
+				i = rs.getInt("consultation_id");
+				date = rs.getDate("date_consultation");
+				suivi= suiviDAO.find(rs.getInt("suivi_id"));
+				appareil= appareilDAO.find(rs.getInt("appareil_id"));
+				statut = rs.getString("statut_appareil");
+				listDAO.add(new Consultation (i,suivi,date,appareil,statut));
 			}
 			
 		} catch (SQLException e) {

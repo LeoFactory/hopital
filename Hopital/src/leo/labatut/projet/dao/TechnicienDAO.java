@@ -7,19 +7,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-import leo.labatut.projet.model.Infirmier;
-import leo.labatut.projet.model.Medecin;
-import leo.labatut.projet.model.Service;
+import leo.labatut.projet.model.AgentAdmin;
+import leo.labatut.projet.model.Technicien;
 
-public class InfirmierDAO extends DAO<Infirmier>{
+public class TechnicienDAO extends DAO<Technicien>{
 	
-	public InfirmierDAO(Connection connection) {
+	public TechnicienDAO(Connection connection) {
 		super(connection);	
 	}
 
 	@Override
-	public boolean create(Infirmier obj) {
-		String sql="INSERT INTO infirmier(nom, prenom, date_naissance,sexe, email,mdp) VALUES ('"+obj.getNom()+"','"+obj.getPrenom()+"','"+new java.sql.Date(obj.getDateNaissance().getTime())+"','"+obj.getSexe()+"','"+obj.getEmail()+"','"+obj.getMdp()+"')";
+	public boolean create(Technicien obj) {
+		String sql="INSERT INTO technicien(nom, prenom, date_naissance,sexe, email) VALUES ('"+obj.getNom()+"','"+obj.getPrenom()+"','"+new java.sql.Date(obj.getDateNaissance().getTime())+"','"+obj.getSexe()+"','"+obj.getEmail()+"')";
 		Statement stmt= null;	
 		
 		boolean bool =false;
@@ -37,9 +36,9 @@ public class InfirmierDAO extends DAO<Infirmier>{
 	}
 
 	@Override
-	public boolean delete(Infirmier obj) {
+	public boolean delete(Technicien obj) {
 		boolean bool = false;
-		String s = "DELETE FROM infirmier WHERE infirmier_id = "+obj.getId();
+		String s = "DELETE FROM technicien WHERE id = "+obj.getId();
 		
 		Statement stmt=null;
 		
@@ -57,9 +56,9 @@ public class InfirmierDAO extends DAO<Infirmier>{
 	}
 
 	@Override
-	public boolean update(Infirmier obj) {
-		String sql="UPDATE infirmier SET email = '"+obj.getEmail()+"', mdp = '"+obj.getMdp()
-				+ "' WHERE infirmier_id = "+obj.getId();
+	public boolean update(Technicien obj) {
+		String sql="UPDATE technicien SET email = '"+obj.getEmail()+"', mdp = '"+obj.getMdp()
+				+ "' WHERE technicien = "+obj.getId();
 		Statement stmt= null;	
 		
 		boolean bool =false;
@@ -77,19 +76,16 @@ public class InfirmierDAO extends DAO<Infirmier>{
 		return bool;
 	}
 	@Override
-	public ArrayList<Infirmier> findAll(){
-		
+	public ArrayList<Technicien> findAll(){
 		this.listDAO.clear();
-		
-		String sql="SELECT * FROM infirmier;";
+		String sql="SELECT * FROM technicien;";
 		Statement stmt= null;
 		ResultSet rs=null;
 		
-		int i,service;
+		int i;
 		String s1,s2,s3;
 		Date dateNaissance;
 		char ch;
-		ServiceDAO dao = new ServiceDAO(cn);
 		
 		try {	
 			stmt = cn.createStatement();
@@ -101,13 +97,13 @@ public class InfirmierDAO extends DAO<Infirmier>{
 		
 		try {
 			while (rs.next()) {
-				i = rs.getInt("infirmier_id");
+				i = rs.getInt("technicien_id");
 				s1 = rs.getString("nom");
 				s2 = rs.getString("prenom");
 				dateNaissance= rs.getDate("date_naissance");
 				ch= rs.getString("sexe").charAt(0);
 				s3 = rs.getString("email");
-				this.listDAO.add( new Infirmier(i,s1,s2,dateNaissance,ch,s3)) ;
+				this.listDAO.add( new Technicien(i,s1,s2,dateNaissance,ch,s3)) ;
 			}
 			
 		} catch (SQLException e) {
@@ -119,13 +115,13 @@ public class InfirmierDAO extends DAO<Infirmier>{
 	}
 	
 	@Override
-	public Infirmier find(int id){
+	public Technicien find(int id){
 		
-		String sql="SELECT * FROM infirmier WHERE infirmier_id = "+id+";";
+		String sql="SELECT * FROM technicien WHERE technicien_id = "+id;
 		Statement stmt= null;
 		ResultSet rs=null;
 		
-		Infirmier infirmier=null;
+		Technicien tec=null;
 		
 		int i;
 		String s1,s2,s3;
@@ -142,14 +138,13 @@ public class InfirmierDAO extends DAO<Infirmier>{
 		
 		try {
 			while (rs.next()) {
-				i = rs.getInt("infirmier_id");
+				i = rs.getInt("technicien_id");
 				s1 = rs.getString("nom");
 				s2 = rs.getString("prenom");
 				dateNaissance= rs.getDate("date_naissance");
 				ch= rs.getString("sexe").charAt(0);
-				
 				s3 = rs.getString("email");
-				infirmier= new Infirmier(i,s1,s2,dateNaissance,ch,s3) ;
+				tec= new Technicien(i,s1,s2,dateNaissance,ch,s3) ;
 			}
 			
 		} catch (SQLException e) {
@@ -157,17 +152,17 @@ public class InfirmierDAO extends DAO<Infirmier>{
 			e.printStackTrace();
 		} 
 		
-		return infirmier;
+		return tec;
 	
 	}
 	
-	public Infirmier find(String nom){
+	public Technicien find(String nom){
 		
-		String sql="SELECT * FROM infirmier WHERE nom = '"+nom+"'";
+		String sql="SELECT * FROM technicien WHERE nom = '"+nom+"'";
 		Statement stmt= null;
 		ResultSet rs=null;
 		
-		Infirmier infirmier=null;
+		Technicien tec=null;
 		
 		int i;
 		String s1,s2,s3;
@@ -184,13 +179,13 @@ public class InfirmierDAO extends DAO<Infirmier>{
 		
 		try {
 			while (rs.next()) {
-			i = rs.getInt("infirmier_id");
+			i = rs.getInt("technicien_id");
 			s1 = rs.getString("nom");
 			s2 = rs.getString("prenom");
 			dateNaissance= rs.getDate("date_naissance");
 			ch= rs.getString("sexe").charAt(0);
 			s3 = rs.getString("email");
-			infirmier= new Infirmier(i,s1,s2,dateNaissance,ch,s3) ;
+			tec= new Technicien(i,s1,s2,dateNaissance,ch,s3) ;
 			}
 			
 		} catch (SQLException e) {
@@ -198,8 +193,7 @@ public class InfirmierDAO extends DAO<Infirmier>{
 			e.printStackTrace();
 		} 
 		
-		return infirmier;
+		return tec;
 	
 	}
-	
 }

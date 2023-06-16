@@ -26,7 +26,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Main {
-	
+	/**
+	 * point d'entrée
+	 * permet de lancer l'application
+	 * @param args
+	 */
 	
     public static void main(String[]args){
     	

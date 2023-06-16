@@ -13,39 +13,46 @@ class PatientTest {
     @Test
     void getNom() {
         Calendar c1 = Calendar.getInstance();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
+        Date naissance = new Date();
+        Patient p1 =new Patient(1,"Richard","Georges",c1.getTime(),naissance,'M',"kjhsqd@hotmail.com");
         assertEquals(p1.getNom(),"Richard");
     }
 
     @Test
     void getPrenom() {
         Calendar c1 = Calendar.getInstance();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
+        Date naissance = new Date();
+        Patient p1 =new Patient(1,"Richard","Georges",c1.getTime(),naissance,'M',"kjhsqd@hotmail.com");
         assertEquals(p1.getPrenom(),"Georges");
     }
 
     @Test
     void getDateCreation() {
         Calendar c1 = Calendar.getInstance();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
+        Date naissance = new Date();
+        Patient p1 =new Patient(1,"Richard","Georges",c1.getTime(),naissance,'M',"kjhsqd@hotmail.com");
         assertEquals(p1.getDateCreation(),c1.getTime());
     }
 
     @Test
     void getIdPatient() {
         Calendar c1 = Calendar.getInstance();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
-        Patient p2 =new Patient("Richard","Georges",c1.getTime());
-        Patient p3 =new Patient("Richard","Georges",c1.getTime());
-        assertEquals(p1.getIdPatient(),0);
-        assertEquals(p2.getIdPatient(),1);
-        assertEquals(p3.getIdPatient(),2);
+        Date naissance = new Date();
+        Date naissance2 = new Date();
+        Date naissance3 = new Date();
+        Patient p1 =new Patient(0,"Richard","Georges",c1.getTime(),naissance,'M',"kjhsqd@hotmail.com");
+        Patient p2 =new Patient(1,"Richard","Georges",c1.getTime(),naissance2,'M',"tytuu@hotmail.com");
+        Patient p3 =new Patient(2,"Richard","Georges",c1.getTime(),naissance3,'M',"1234@hotmail.com");
+        assertEquals(p1.getId(),0);
+        assertEquals(p2.getId(),1);
+        assertEquals(p3.getId(),2);
     }
 
     @Test
     void setNom() {
         Calendar c1 = Calendar.getInstance();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
+        Date naissance = new Date();
+        Patient p1 =new Patient(0,"Richard","Georges",c1.getTime(),naissance,'M',"kjhsqd@hotmail.com");
         p1.setNom("Barnabé");
         assertEquals(p1.getNom(),"Barnabé");
     }
@@ -53,8 +60,9 @@ class PatientTest {
     @Test
     void setDateCreation() {
         Calendar c1 = Calendar.getInstance();
+        Date naissance = new Date();
         Date date = new Date();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
+        Patient p1 =new Patient(0,"Richard","Georges",c1.getTime(),naissance,'M',"kjhsqd@hotmail.com");
         p1.setDateCreation(date);
         assertEquals(p1.getDateCreation(),date);
     }
@@ -62,15 +70,10 @@ class PatientTest {
     @Test
     void setPrenom() {
         Calendar c1 = Calendar.getInstance();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
+        Date naissance = new Date();
+        Patient p1 =new Patient(0,"Richard","Georges",c1.getTime(),naissance,'M',"kjhsqd@hotmail.com");
         p1.setPrenom("Barnabé");
         assertEquals(p1.getPrenom(),"Barnabé");
     }
-    @Test
-    void getNbPatient(){
-        Calendar c1 = Calendar.getInstance();
-        Patient p1 =new Patient("Richard","Georges",c1.getTime());
-        assertEquals(1,p1.getIdPatient());
-
-    }
+    
 }

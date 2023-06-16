@@ -162,7 +162,7 @@ public class ServiceDAO extends DAO<Service> {
 		
 		try {
 			while (rs.next()) {
-				i = rs.getInt("Medecin_id");
+				i = rs.getInt("service_id");
 				s1 = rs.getString("nom");
 				this.listDAO.add( new Service(i,s1)) ;
 			}

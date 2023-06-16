@@ -17,7 +17,7 @@ public class PathologieDAO extends DAO<Pathologie> {
 
 	@Override
 	public boolean create(Pathologie obj) {
-		String sql="INSERT INTO pathologie(nom) VALUES ('"+obj.getNom()+"')";
+		String sql="INSERT INTO pathologie(nom,service) VALUES ('"+obj.getNom()+"',"+obj.getService().getId()+")";
 		Statement stmt= null;	
 		
 		boolean bool =false;
@@ -81,6 +81,8 @@ public class PathologieDAO extends DAO<Pathologie> {
 		ResultSet rs=null;
 		
 		Pathologie pathologie=null;
+		Service service;
+		ServiceDAO serviceDAO = new ServiceDAO(cn);
 		
 		int i;
 		String s1;
@@ -98,7 +100,8 @@ public class PathologieDAO extends DAO<Pathologie> {
 			while (rs.next()) {
 				i = rs.getInt("pathologie_id");
 				s1 = rs.getString("nom");
-				pathologie= new Pathologie(i,s1) ;
+				service= serviceDAO.find(rs.getInt("service"));
+				pathologie= new Pathologie(i,s1,service) ;
 			}
 			
 		} catch (SQLException e) {
@@ -118,6 +121,8 @@ public class PathologieDAO extends DAO<Pathologie> {
 		
 		int i;
 		String s1;
+		Service service;
+		ServiceDAO serviceDAO = new ServiceDAO(cn);
 		
 		try {	
 			stmt = cn.createStatement();
@@ -131,7 +136,40 @@ public class PathologieDAO extends DAO<Pathologie> {
 			while (rs.next()) {
 				i = rs.getInt("pathologie_id");
 				s1 = rs.getString("nom");
-				this.listDAO.add( new Pathologie(i,s1)) ;
+				service= serviceDAO.find(rs.getInt("service"));
+				this.listDAO.add( new Pathologie(i,s1,service)) ;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return this.listDAO;
+	}
+	public ArrayList<Pathologie> findByService(Service service) {
+		listDAO.clear();
+		String sql="SELECT * FROM pathologie WHERE service= "+service.getId() +";";
+		Statement stmt= null;
+		ResultSet rs=null;
+		
+		int i;
+		String s1;
+		
+		
+		try {	
+			stmt = cn.createStatement();
+			rs = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			while (rs.next()) {
+				i = rs.getInt("pathologie_id");
+				s1 = rs.getString("nom");
+				this.listDAO.add( new Pathologie(i,s1,service)) ;
 			}
 			
 		} catch (SQLException e) {
